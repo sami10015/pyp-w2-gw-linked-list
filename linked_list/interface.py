@@ -33,7 +33,6 @@ class AbstractLinkedList(object):
 
     def append(self, element):
         raise NotImplementedError()
-
     def count(self):
         raise NotImplementedError()
 

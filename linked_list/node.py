@@ -3,8 +3,9 @@ class Node(object):
     Node class representing each of the linked nodes in the list.
     """
 
-    def __init__(self, elem, next=None):
-        pass
+    def __init__(self, element=None, next=None):
+        self.elem = element
+        self.next = next
 
     def __str__(self):
         pass

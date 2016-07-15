@@ -60,3 +60,8 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#Virtual Env
+linked_list/bin/
+linked_list/include/
+linked_list/local/
