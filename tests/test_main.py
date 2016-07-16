@@ -43,7 +43,7 @@ class LinkedListTestCase(unittest.TestCase):
 
     def test_pop_removes_last_item_by_default(self):
         l1 = LinkedList([1, 2, 3])
-
+        
         elem = l1.pop()
         self.assertEqual(elem, 3)
         self.assertEqual(l1.count(), 2)

@@ -17,7 +17,15 @@ class LinkedList(AbstractLinkedList):
 
                     
     def __str__(self):
-        return 
+        if self.start is None and self.end is None:
+            return '[]'
+        return_str = '['
+        for elem in self:
+            if elem == self.end.elem:
+                return_str += str(elem) + ']'
+                break
+            return_str += str(elem) + ', '
+        return return_str
 
     def __len__(self):
         if self.start is None:
@@ -32,39 +40,49 @@ class LinkedList(AbstractLinkedList):
 
     def __iter__(self):
         aux = self.start
+        #While aux exists
         while aux:
+            #Return and hold the element under that node, and move it to the next one
             yield aux.elem
             aux = aux.next
+        #When done, raise a StopIteration error 
         raise StopIteration   
             
     def __getitem__(self, index):
-        import ipdb; ipdb.set_trace()
-        pass
-    # l = [object1,object2,object3]
-    
-    #have to:
-    #enumerate(self)
-    #check if index is in any of enumerate(self)'s tuples
-    
-    # list(enumerate(l))
-    # [(0, object1), ... ]
-    
-    #raise KeyError if index doesn't exist in our object
-    
-    # IndexError?
+        if not isinstance(index, int):
+            raise TypeError('list indices must be integers, not str')
+        elif index >= len(self):
+            raise IndexError('list index out of range')
+            
+        for i, elem in enumerate(self):
+            if i == index:
+                return elem
+        raise KeyError #If nothing was found, raise a KeyError
 
     def __add__(self, other):
-        pass
+        aux_list = LinkedList()
+        for node in self:
+            aux_list.append(node)
+            
+        for node in other:
+            aux_list.append(node)
+        return aux_list
 
     def __iadd__(self, other):
-        pass
+        for node in other:
+            self.append(node)
+        return self
 
     def __eq__(self, other):
         if len(self) != len(other):
             return False
-            
-        #for elem in range(len(self)):
-        #    if self[elem] 
+        for index, elem in enumerate(self):
+            if elem != other[index]:
+                return False
+        return True
+        
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def append(self, elem):
         new_node = Node(elem)
@@ -80,7 +98,27 @@ class LinkedList(AbstractLinkedList):
         return len(self)
 
     def pop(self, index=None):
-        pass
-
-# l = LinkedList()
-# l = LinkedList([1, 5, 10])
+        previous = self.start
+        
+        if len(self) == 0 or index >= len(self):
+            raise IndexError
+            
+        if index is None:
+            index = len(self) - 1
+        
+        if index == 0:
+            return_elem = self.start.elem
+            self.start = self.start.next
+            return return_elem
+            
+        for i in range(index - 1):
+            previous = previous.next
+            
+        if previous.next:
+            return_elem = previous.next.elem
+            previous.next = previous.next.next
+            return return_elem
+        else:
+            return_elem = previous.elem
+            self.start = None
+            return return_elem

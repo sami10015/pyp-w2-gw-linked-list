@@ -8,10 +8,12 @@ class Node(object):
         self.next = next
 
     def __str__(self):
-        pass
+        return str(self.elem)
 
     def __eq__(self, other):
-        pass
+        if self.elem == other.elem:
+            return True
+        return False 
 
     def __repr__(self):
-        pass
+        return self.elem
