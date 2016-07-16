@@ -33,19 +33,16 @@ class LinkedList(AbstractLinkedList):
             
         length = 1
         aux = self.start
-        while aux.next != None:
+        while aux.next is not None:
             aux = aux.next
             length += 1
         return length
 
     def __iter__(self):
         aux = self.start
-        #While aux exists
         while aux:
-            #Return and hold the element under that node, and move it to the next one
             yield aux.elem
             aux = aux.next
-        #When done, raise a StopIteration error 
         raise StopIteration   
             
     def __getitem__(self, index):
@@ -57,7 +54,7 @@ class LinkedList(AbstractLinkedList):
         for i, elem in enumerate(self):
             if i == index:
                 return elem
-        raise KeyError #If nothing was found, raise a KeyError
+        raise KeyError
 
     def __add__(self, other):
         aux_list = LinkedList()
